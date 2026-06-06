@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do List</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body
+    class="bg-gray-100 dark:bg-slate-900 text-gray-800 dark:text-gray-100 font-sans min-h-screen py-10 transition-colors duration-300">
+    <div class="max-w-2xl mx-auto px-4">
+      <header class="mb-8 relative">
+        <h1
+          class="bg-slate-800 dark:bg-slate-950 text-white text-3xl font-bold text-center py-8 rounded-t-xl shadow-md tracking-wide transition-colors">
+          TO-DO LIST
+        </h1>
+        <button
+          id="themeToggle"
+          class="absolute top-1/2 -translate-y-1/2 right-6 bg-slate-700 hover:bg-slate-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+          Dark Mode
+        </button>
+      </header>
+
+      <section
+        class="bg-white dark:bg-slate-800 shadow-md rounded-b-xl -mt-8 p-6 mb-8 border border-gray-200 dark:border-slate-700 transition-colors">
+        <ul id="taskList" class="space-y-3"></ul>
+      </section>
+
+      <section
+        class="bg-white dark:bg-slate-800 shadow-md rounded-xl p-6 border border-gray-200 dark:border-slate-700 transition-colors">
+        <form id="addItem" class="flex flex-col gap-4">
+          <textarea
+            id="Task"
+            placeholder="What needs to be done?"
+            class="w-full p-4 bg-transparent border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y min-h-[100px] text-lg transition-colors placeholder-gray-400 dark:placeholder-gray-500"></textarea>
+          <input
+            type="submit"
+            id="addBtn"
+            value="Add to List"
+            class="w-full bg-slate-800 dark:bg-blue-600 hover:bg-slate-900 dark:hover:bg-blue-700 text-white font-semibold py-3 rounded-lg cursor-pointer transition-colors text-lg shadow-sm" />
+        </form>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
