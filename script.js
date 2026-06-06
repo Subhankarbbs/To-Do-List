@@ -7,9 +7,9 @@ const themeToggle = document.getElementById('themeToggle')
 themeToggle.addEventListener('click', () => {
   document.documentElement.classList.toggle('dark')
   if (document.documentElement.classList.contains('dark')) {
-    themeToggle.textContent = 'Light Mode'
-  } else {
     themeToggle.textContent = 'Dark Mode'
+  } else {
+    themeToggle.textContent = 'Light Mode'
   }
 })
 
