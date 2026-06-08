@@ -3,15 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-do List</title>
+    <title>To-do List Pro</title>
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
     <style type="text/tailwindcss">
       @custom-variant dark (&:where(.dark, .dark *));
     </style>
-    s
   </head>
   <body
-    class="bg-gray-100 dark:bg-slate-900 text-gray-800 dark:text-gray-100 font-sans min-h-screen py-10 transition-colors duration-300">
+    class="bg-gray-100 dark:bg-slate-900 text-gray-800 dark:text-gray-100 font-sans min-h-screen py-10 transition-colors duration-300 relative">
     <div class="max-w-2xl mx-auto px-4">
       <header class="mb-8 relative">
         <h1
@@ -26,24 +27,113 @@
       </header>
 
       <section
-        class="bg-white dark:bg-slate-800 shadow-md rounded-b-xl -mt-8 p-6 mb-8 border border-gray-200 dark:border-slate-700 transition-colors">
-        <ul id="taskList" class="space-y-3"></ul>
+        class="bg-white dark:bg-slate-800 shadow-md rounded-xl p-6 mb-8 border border-gray-200 dark:border-slate-700 transition-colors">
+        <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">
+          Insights
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+          <div
+            class="bg-blue-50 dark:bg-slate-700/50 p-4 rounded-lg border border-blue-100 dark:border-slate-600 text-center transition-colors">
+            <p class="text-sm text-gray-500 dark:text-gray-400">Total Tasks</p>
+            <p
+              id="statTotal"
+              class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              0
+            </p>
+          </div>
+          <div
+            class="bg-green-50 dark:bg-slate-700/50 p-4 rounded-lg border border-green-100 dark:border-slate-600 text-center transition-colors">
+            <p class="text-sm text-gray-500 dark:text-gray-400">Completed</p>
+            <p
+              id="statCompleted"
+              class="text-2xl font-bold text-green-600 dark:text-green-400">
+              0
+            </p>
+          </div>
+          <div
+            class="bg-yellow-50 dark:bg-slate-700/50 p-4 rounded-lg border border-yellow-100 dark:border-slate-600 text-center transition-colors">
+            <p class="text-sm text-gray-500 dark:text-gray-400">Pending</p>
+            <p
+              id="statPending"
+              class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
+              0
+            </p>
+          </div>
+          <div
+            class="bg-purple-50 dark:bg-slate-700/50 p-4 rounded-lg border border-purple-100 dark:border-slate-600 text-center transition-colors">
+            <p class="text-sm text-gray-500 dark:text-gray-400">Completion</p>
+            <p
+              id="statPercent"
+              class="text-2xl font-bold text-purple-600 dark:text-purple-400">
+              0%
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+          <div
+            id="progressBar"
+            class="bg-blue-600 h-2.5 rounded-full transition-all duration-500"
+            style="width: 0%"></div>
+        </div>
       </section>
 
       <section
-        class="bg-white dark:bg-slate-800 shadow-md rounded-xl p-6 border border-gray-200 dark:border-slate-700 transition-colors">
+        class="bg-white dark:bg-slate-800 shadow-md rounded-b-xl p-6 mb-8 border border-gray-200 dark:border-slate-700 transition-colors min-h-[300px]">
+        <ul id="taskList" class="space-y-3"></ul>
+      </section>
+    </div>
+
+    <button
+      id="openModalBtn"
+      class="fixed bottom-10 right-10 w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-2xl flex items-center justify-center text-4xl transition-transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-blue-400 z-40 pb-2">
+      +
+    </button>
+
+    <div
+      id="taskModal"
+      class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center px-4 transition-opacity">
+      <div
+        class="bg-white dark:bg-slate-800 w-full max-w-md p-6 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 relative">
+        <button
+          id="closeModalBtn"
+          class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-xl font-bold focus:outline-none">
+          ✕
+        </button>
+
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
+          Add New Task
+        </h2>
+
         <form id="addItem" class="flex flex-col gap-4">
           <textarea
             id="Task"
             placeholder="What needs to be done?"
-            class="w-full p-4 bg-transparent border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y min-h-[100px] text-lg transition-colors placeholder-gray-400 dark:placeholder-gray-500"></textarea>
+            class="w-full p-4 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y min-h-[100px] text-lg transition-colors placeholder-gray-400 dark:placeholder-gray-500"></textarea>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <select
+              id="taskPriority"
+              class="flex-1 p-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 dark:text-gray-200 transition-colors cursor-pointer">
+              <option value="Low" class="text-black">Low Priority</option>
+              <option value="Medium" class="text-black">Medium Priority</option>
+              <option value="High" class="text-black">High Priority</option>
+            </select>
+            <input
+              type="date"
+              id="taskDate"
+              class="flex-1 p-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 dark:text-gray-200 transition-colors cursor-pointer" />
+          </div>
+
           <input
             type="submit"
             id="addBtn"
-            value="Add to List"
-            class="w-full bg-slate-800 dark:bg-blue-600 hover:bg-slate-900 dark:hover:bg-blue-700 text-white font-semibold py-3 rounded-lg cursor-pointer transition-colors text-lg shadow-sm" />
+            value="Save Task"
+            class="w-full bg-slate-800 dark:bg-blue-600 hover:bg-slate-900 dark:hover:bg-blue-700 text-white font-semibold py-3 rounded-lg cursor-pointer transition-colors text-lg shadow-sm mt-4" />
         </form>
-      </section>
+      </div>
     </div>
 
     <script src="script.js"></script>
